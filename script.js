@@ -2,26 +2,45 @@ var css = document.querySelector("h3");
 var color1 = document.querySelector(".color1");
 var color2 = document.querySelector(".color2");
 var body = document.getElementById("gradient");
-var rgb1 = color1.value.match(/.{1,2}/g);
-var rgb2 = color2.value.match(/.{1,2}/g);
-window.onload = css.textContent = color1.value + ", " + color2.value;
-function getFirstColor() {
-    console.log(color1);
-    console.log(color2);
-    css.textContent = body.style.background + ";";
+var header = document.getElementsByTagName("h1");
+var subtitle = document.getElementsByTagName("h2");
+var header3 = document.getElementsByTagName("h3");
+var color3 = document.querySelector(".color3");
+var random_but = document.getElementById("random-but");
+function h1ColorChanger() {
+    for (var i = 0; i < header.length; i++) {
+        header[i].style.color = color3.value + 80;
+        subtitle[i].style.color = color3.value;
+        header3[i].style.color = color3.value;
+    }
+    console.log(color3.value)
 }
+window.onload = css.textContent = color1.value + ", " + color2.value;
+
 function setGradient() {
     console.log(color1.value);
     console.log(color2.value);
     body.style.background = 
     "linear-gradient(to right, "
-    + color1.value 
+    + color1.value
     +", " 
     + color2.value
     + ")";
     css.textContent = body.style.background + ";";
 }
-
+function getColor() {
+  return (
+    "#" + Math.random().toString(16).slice(2, 8)
+  );
+}
+function setBackround() {
+    color1.value = getColor();
+    color2.value = getColor();
+    color3.value = getColor();
+    setGradient();
+    h1ColorChanger();
+}    
 color1.addEventListener("input", setGradient);
 color2.addEventListener("input", setGradient);
-/* h4.addEventListener("input", radomColorGenerator) */
+color3.addEventListener("input", h1ColorChanger);
+random_but.addEventListener("click", setBackround);
